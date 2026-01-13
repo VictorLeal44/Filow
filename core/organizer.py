@@ -1,43 +1,41 @@
-import os
 import shutil
+from pathlib import Path 
+import platformdirs
 
-type_file = {
-    '.png':'image',
-    '.jpg':'image',
-    '.jpge':'image',
-    '.mp3':'music',
-    '.mp4':'video',
-    '.docx':'document',
-    '.sql':'sql',
-    '.py':'.python',
-    '.php':'php',
-    '.txt':'notas'
+folder_mapping = {
+    'Images': platformdirs.user_pictures_dir(),
+    'Document': platformdirs.user_documents_dir(),
+    'Data': platformdirs.user_documents_dir(),
+    'Audio': platformdirs.user_music_dir(),
+    'Video': platformdirs.user_videos_dir(),
+    'Archives': Path.home() / "Archives",
+    'Code': Path.home() / "Code",
+    'Executables': Path.home() / "Executables",
+    'Presentations': platformdirs.user_documents_dir(),
 }
 
-def prueba():
-    try:
-        file_register('./')
-    except:
-        ...
+def file_information_size(path_str):
+    size = Path(path_str).stat().st_size
+    print(f"Tamaño: {size} bytes")
 
-def file_information_size(path):
-    print(os.path.getsize(path))
+def new_folder(name):
+    Path(name).mkdir(parents=True, exist_ok=True)
 
-def file_move():
-    shutil.move('./archivo_de_prueba.txt','core/')
+def file_register(path_to_scan):
+    path_obj = Path(path_to_scan)
+    folder_items = []
+    
+    for item in path_obj.iterdir():
+        if item.is_file():
+            extension = item.suffix 
+            size = Path(item).stat().st_size
+            folder_items.append((item.name,f'{size} bytes',extension))
+            #print(f"archivo: {item.name}")
+            #print(f"Extensión: {extension}")
+        else:
+            print(f"carpeta: {item}",Path(item).stat().st_size)
+    print(folder_items)
 
-def file_exitst():
-    os.path.exists()
-
-def file_register(path):
-    print(os.listdir(path))
-    for item in os.listdir(path):
-        if os.path.isfile(f'{path}/{item}'):
-            print('es un archivo '+item)
-            os.path.splitext(item)[1]
-            print(f'el archivo {item} pertenece a la carpeta {type_file[os.path.splitext(item)[1]]}')
-        #else:
-        #   print('es una carpeta '+item)
-
-def new_folder():
-    os.mkdir('nombre_carpeta')
+def folder_mapping_exists():
+    for item in folder_mapping.values():
+        print(Path(f'{item}/ejemplo'))

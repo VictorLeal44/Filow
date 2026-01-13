@@ -1,3 +1,5 @@
 import organizer
 
-organizer.prueba()
+#organizer.file_register('./')
+
+organizer.folder_mapping_exists()
