@@ -14,10 +14,6 @@ folder_mapping = {
     'Presentations': platformdirs.user_documents_dir(),
 }
 
-def file_information_size(path_str):
-    size = Path(path_str).stat().st_size
-    print(f"Tamaño: {size} bytes")
-
 def new_folder(name):
     Path(name).mkdir(parents=True, exist_ok=True)
 
@@ -37,5 +33,7 @@ def file_register(path_to_scan):
     print(folder_items)
 
 def folder_mapping_exists():
-    for item in folder_mapping.values():
-        print(Path(f'{item}/ejemplo'))
+    new_folder = ('Archives','Code','Executables')
+    for item in folder_mapping:
+        if item in new_folder:
+            print(Path(f'{folder_mapping[item]}/{item}'))
