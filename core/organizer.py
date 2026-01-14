@@ -1,6 +1,9 @@
 import shutil
 from pathlib import Path 
 import platformdirs
+import models
+
+sqlmanager = models.sqlmanager()
 
 folder_mapping = {
     'Images': platformdirs.user_pictures_dir(),
@@ -33,7 +36,9 @@ def file_register(path_to_scan):
     print(folder_items)
 
 def folder_mapping_exists():
-    new_folder = ('Archives','Code','Executables')
+    organization = sqlmanager.file_organization()
     for item in folder_mapping:
-        if item in new_folder:
-            print(Path(f'{folder_mapping[item]}/{item}'))
+        for new_folder in organization:
+            if item == new_folder[1]:
+                print(Path(f'{folder_mapping[item]}/{new_folder[0].replace('.','')}'))
+                Path(f'{folder_mapping[item]}/{new_folder[0].replace('.','')}').mkdir(parents=True, exist_ok=True)
