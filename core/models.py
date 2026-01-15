@@ -41,13 +41,23 @@ class sqlmanager:
         sql = '''SELECT
 	file_organization.extension, 
 	category.category_name, 
-	file_organization.custom_path
+	file_organization.custom_path,
+    file_organization.subfolder
 FROM
 	category
 	INNER JOIN
 	file_organization
 	ON 
 		category.id = file_organization.category'''
+        return self.query(sql)
+
+    def custom_file_organization(self):
+        sql = '''SELECT
+	file_organization.extension, 
+	file_organization.custom_path
+FROM
+	file_organization
+'''
         return self.query(sql)
 
     def file_history(self):
@@ -81,4 +91,10 @@ ORDER BY
 
     def delete_custom_path(self,params):
         sql = '''UPDATE "main"."file_organization" SET "custom_path" = Null WHERE rowid = ?'''
+        self.cursor(sql,params)
+
+    def set_subfolder(self,params):
+        # 0 para false 1 para true 
+        # el segundo parametro es el id
+        sql = 'UPDATE "main"."file_organization" SET "subfolder" = ? WHERE rowid = ?'
         self.cursor(sql,params)

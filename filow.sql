@@ -78,6 +78,7 @@ CREATE TABLE "file_organization" (
   "extension" TEXT,
   "category" integer,
   "custom_path" TEXT,
+  "subfolder" TEXT(1),
   FOREIGN KEY ("category") REFERENCES "category" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
@@ -143,3 +144,6 @@ INSERT INTO "file_organization" VALUES (56, '.AppImage', 8, 'NULL');
 INSERT INTO "file_organization" VALUES (57, '.pptx', 9, 'NULL');
 INSERT INTO "file_organization" VALUES (58, '.ppt', 9, 'NULL');
 INSERT INTO "file_organization" VALUES (59, '.key', 9, 'NULL');
+
+ALTER TABLE "file_organization" 
+ADD COLUMN "subfolder" TEXT(1) DEFAULT '0';
