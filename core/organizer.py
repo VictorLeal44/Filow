@@ -1,7 +1,7 @@
 import shutil
 from pathlib import Path
 import platformdirs
-import models
+from core import models
 
 sqlmanager = models.sqlmanager()
 
@@ -22,18 +22,22 @@ def new_folder(name):
 
 def file_register(path_to_scan):
     path_obj = Path(path_to_scan)
-    folder_items = []
+    folder_items = {
+        'files':[],
+        'folders':[]
+    }
     
     for item in path_obj.iterdir():
         if item.is_file():
             extension = item.suffix 
             size = Path(item).stat().st_size
-            folder_items.append((item.name,f'{size} bytes',extension))
+            folder_items['files'].append((item.name,f'{size} bytes',extension))
             #print(f"archivo: {item.name}")
             #print(f"Extensión: {extension}")
         else:
-            print(f"carpeta: {item}",Path(item).stat().st_size)
-    print(folder_items)
+            folder_items['folders'].append((item.name))
+            #print(f"carpeta: {item}",Path(item).stat().st_size)
+    return folder_items
 
 def folder_mapping():
     organization = sqlmanager.file_organization()

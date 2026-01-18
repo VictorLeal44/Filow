@@ -1,10 +1,10 @@
 import organizer
 import models
 
-#organizer.file_register('./')
+print(organizer.file_register('.')['folders'])
 
-organizer.custom_folder_mapping()
-organizer.folder_mapping()
+#organizer.custom_folder_mapping()
+#organizer.folder_mapping()
 
 sqlmanager = models.sqlmanager()
 

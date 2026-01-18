@@ -1,3 +1,3 @@
 from .ui_views import *
 from .template import MainTemplate
-#from .components
+from .components import *
