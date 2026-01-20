@@ -32,11 +32,8 @@ def file_register(path_to_scan):
             extension = item.suffix 
             size = Path(item).stat().st_size
             folder_items['files'].append((item.name,f'{size} bytes',extension))
-            #print(f"archivo: {item.name}")
-            #print(f"Extensión: {extension}")
         else:
             folder_items['folders'].append((item.name))
-            #print(f"carpeta: {item}",Path(item).stat().st_size)
     return folder_items
 
 def folder_mapping():
