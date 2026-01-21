@@ -9,7 +9,7 @@ def home(page):
         expand=True,
         controls=[
             ft.Container(
-                bgcolor=ft.Colors.BLUE_700,
+                bgcolor='#3fbdbc',
                 content=ft.Row(controls=[]),
                 height=80
             ),
@@ -18,22 +18,63 @@ def home(page):
                 expand=True,
                 vertical_alignment=ft.CrossAxisAlignment.STRETCH,
                 spacing=0,
+                
                 controls=[
                     ft.Container(
                         width=240,
+                        border=ft.border.all(2, '#3fbdbc'),
+                        border_radius=10,
+                        margin = 16,
                         content=ft.Column(
                             controls=[components.folders_groups('./')], 
                             scroll=ft.ScrollMode.ADAPTIVE,
                         )
                     ),
-                    
-                    ft.Container(
+                    ft.Column(
                         expand=True,
-                        content=ft.Column(
-                            controls=[components.file_groups('/home/archimago/Descargas/')],
-                            scroll=ft.ScrollMode.ADAPTIVE,
-                        )
-                    ),
+                        controls = [
+                        ft.Row(
+                            controls=[
+                            ft.Container(expand=True,
+                            content = ft.Text('Carpeta'),
+                            border=ft.border.all(2, '#3fbdbc'),
+                            border_radius=10,
+                            padding=8,
+                            margin = ft.Margin.only(left=16,top=16,right=0,bottom=0),
+                            height=44
+                            ),
+
+                            ft.Container(expand=True,
+                            content = ft.Text('Cantidad'),
+                            border=ft.border.all(2, '#3fbdbc'),
+                            border_radius=10,
+                            padding=8,
+                            margin = ft.Margin.only(left=16,top=16,right=16,bottom=0),
+                            height=44
+                            ),
+
+                            ft.Container(expand=True,
+                            content = ft.Text('Peso'),
+                            border=ft.border.all(2, '#3fbdbc'),
+                            border_radius=10,
+                            padding=8,
+                            margin = ft.Margin.only(left=0,top=16,right=16,bottom=0),
+                            height=44
+                            ),
+                            ]
+                            ),
+                        ft.Container(
+                            expand=True,
+                            border=ft.border.all(2, '#3fbdbc'),
+                            border_radius=10,
+                            margin = 16,
+                            content=ft.Column(
+                                controls=[components.file_groups('/home/archimago/Descargas/')],
+                                scroll=ft.ScrollMode.ADAPTIVE,
+                            )
+                        ),
+                    ])
+                    
                 ],
             )
         ]
