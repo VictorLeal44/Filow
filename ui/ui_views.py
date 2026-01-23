@@ -10,7 +10,15 @@ def home(page):
         controls=[
             ft.Container(
                 bgcolor='#3fbdbc',
-                content=ft.Row(controls=[]),
+                content=ft.Row(
+                    spacing=12,
+                    margin=12,
+                    controls=[
+                    #ft.Image(src="https://flet.dev/img/logo.svg", width=100, height=100,),
+                    ft.TextField(expand=True),
+                    ft.FilledIconButton(icon=ft.Icons.SEARCH),
+                    ft.FilledIconButton(icon=ft.Icons.SETTINGS),
+                ]),
                 height=80
             ),
             
