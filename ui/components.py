@@ -12,6 +12,15 @@ def estoy_aqui(e):# proximamente sera ajustado
     else:
         print('cerrado')
 
+def searcher():
+    text_searcher = ft.TextField(
+        expand=True,
+        value = f'{current_path()}',
+        bgcolor= '#272c32',
+        border_color = '#7d7d7d',
+        prefix_icon=ft.Icons.FOLDER)
+    return text_searcher
+
 def folders_groups(path_to_scan):
     folders = organizer.file_register(path_to_scan)['folders']
     groups = []

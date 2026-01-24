@@ -9,13 +9,14 @@ def home(page):
         expand=True,
         controls=[
             ft.Container(
-                bgcolor='#3fbdbc',
+                bgcolor='#272c32',
+                border=ft.border.only(bottom=ft.BorderSide(2, '#2c3035')),
                 content=ft.Row(
                     spacing=12,
                     margin=12,
                     controls=[
                     #ft.Image(src="https://flet.dev/img/logo.svg", width=100, height=100,),
-                    ft.TextField(expand=True),
+                    components.searcher(),
                     ft.FilledIconButton(icon=ft.Icons.SEARCH),
                     ft.FilledIconButton(icon=ft.Icons.SETTINGS),
                 ]),
@@ -30,11 +31,12 @@ def home(page):
                 controls=[
                     ft.Container(
                         width=240,
-                        border=ft.border.all(2, '#3fbdbc'),
+                        bgcolor = '#272c32',
+                        border=ft.border.all(2, '#2c3035'),
                         border_radius=10,
                         margin = 16,
                         content=ft.Column(
-                            controls=[components.folders_groups('./')], 
+                            controls=[components.folders_groups(current_path())], 
                             scroll=ft.ScrollMode.ADAPTIVE,
                         )
                     ),
@@ -45,7 +47,8 @@ def home(page):
                             controls=[
                             ft.Container(expand=True,
                             content = ft.Text('Carpeta'),
-                            border=ft.border.all(2, '#3fbdbc'),
+                            bgcolor = '#272c32',
+                            border=ft.border.all(2, '#2c3035'),
                             border_radius=10,
                             padding=8,
                             margin = ft.Margin.only(left=16,top=16,right=0,bottom=0),
@@ -54,7 +57,8 @@ def home(page):
 
                             ft.Container(expand=True,
                             content = ft.Text('Cantidad'),
-                            border=ft.border.all(2, '#3fbdbc'),
+                            bgcolor = '#272c32',
+                            border=ft.border.all(2, '#2c3035'),
                             border_radius=10,
                             padding=8,
                             margin = ft.Margin.only(left=16,top=16,right=16,bottom=0),
@@ -63,7 +67,8 @@ def home(page):
 
                             ft.Container(expand=True,
                             content = ft.Text('Peso'),
-                            border=ft.border.all(2, '#3fbdbc'),
+                            bgcolor = '#272c32',
+                            border=ft.border.all(2, '#2c3035'),
                             border_radius=10,
                             padding=8,
                             margin = ft.Margin.only(left=0,top=16,right=16,bottom=0),
@@ -73,11 +78,12 @@ def home(page):
                             ),
                         ft.Container(
                             expand=True,
-                            border=ft.border.all(2, '#3fbdbc'),
+                            bgcolor = '#272c32',
+                            border=ft.border.all(2, '#2c3035'),
                             border_radius=10,
                             margin = 16,
                             content=ft.Column(
-                                controls=[components.file_groups('/home/archimago/Descargas/')],
+                                controls=[components.file_groups(current_path())],
                                 scroll=ft.ScrollMode.ADAPTIVE,
                             )
                         ),

@@ -5,6 +5,14 @@ from core import models
 
 sqlmanager = models.sqlmanager()
 
+def current_path(new_path = None):
+    global data
+    if not new_path:
+        data = Path.home()
+    else:
+        data += new_path
+    return data
+
 folder_path = {
     'Images': platformdirs.user_pictures_dir(),
     'Document': platformdirs.user_documents_dir(),
@@ -44,7 +52,6 @@ def folder_mapping():
 
             if item == new_folder[1] and new_folder[3] == '0' and not new_folder[2]:
                 print(Path(f'{folder_path[item]}/{new_folder[0].replace('.','')}'))
-                #Path(f'{folder_path[item]}/{new_folder[0].replace('.','')}').mkdir(parents=True, exist_ok=True)
             
             elif item == new_folder[1] and new_folder[3] == '1' and not new_folder[2]:
                 print(Path(f'{folder_path[item]}'))
