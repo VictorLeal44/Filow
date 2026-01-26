@@ -36,11 +36,11 @@ def file_register(path_to_scan):
     }
     
     for item in path_obj.iterdir():
-        if item.is_file():
+        if item.is_file() and not item.name.startswith('.'):
             extension = item.suffix 
             size = Path(item).stat().st_size
             folder_items['files'].append((item.name,f'{size} bytes',extension))
-        else:
+        elif item.is_dir() and not item.name.startswith('.'):
             folder_items['folders'].append((item.name))
     return folder_items
 
