@@ -16,7 +16,7 @@ def home(page):
                     margin=12,
                     controls=[
                     #ft.Image(src="https://flet.dev/img/logo.svg", width=100, height=100,),
-                    components.desing.searcher(),
+                    components.desing.text_searcher,
                     ft.FilledIconButton(icon=ft.Icons.SEARCH),
                     ft.FilledIconButton(icon=ft.Icons.SETTINGS),
                 ]),

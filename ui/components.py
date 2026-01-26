@@ -4,7 +4,13 @@ from core import *
 
 class components:
     def __init__(self):
-        ...
+        self.select_tile = f'{current_path()}'
+        self.text_searcher = ft.TextField(
+            expand=True,
+            value = self.select_tile,
+            bgcolor= '#272c32',
+            border_color = '#7d7d7d',
+            prefix_icon=ft.Icons.FOLDER)
 
     def open_folder(self,e):
         valor = e.control.data
@@ -13,6 +19,7 @@ class components:
 
         if e.data == True:
             list_mapping = organizer.register(valor)
+            self.text_searcher.value = valor
             for items in list_mapping['folders']:
                 print(f"Hiciste clic en: {valor,items}")
                 new_name = valor+'/'+items
@@ -20,16 +27,6 @@ class components:
         else:
             print('cerrado')
         e.control.update()
-        
-
-    def searcher(self):
-        text_searcher = ft.TextField(
-            expand=True,
-            value = f'{current_path()}',
-            bgcolor= '#272c32',
-            border_color = '#7d7d7d',
-            prefix_icon=ft.Icons.FOLDER)
-        return text_searcher
 
     def folders_groups(self,path_to_scan):
         folders = organizer.register(path_to_scan)['folders']
