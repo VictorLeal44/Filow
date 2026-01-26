@@ -16,7 +16,7 @@ def home(page):
                     margin=12,
                     controls=[
                     #ft.Image(src="https://flet.dev/img/logo.svg", width=100, height=100,),
-                    components.searcher(),
+                    components.desing.searcher(),
                     ft.FilledIconButton(icon=ft.Icons.SEARCH),
                     ft.FilledIconButton(icon=ft.Icons.SETTINGS),
                 ]),
@@ -36,7 +36,7 @@ def home(page):
                         border_radius=10,
                         margin = 16,
                         content=ft.Column(
-                            controls=[components.folders_groups(current_path())], 
+                            controls=[components.desing.folders_groups(current_path())], 
                             scroll=ft.ScrollMode.ADAPTIVE,
                         )
                     ),
@@ -83,7 +83,7 @@ def home(page):
                             border_radius=10,
                             margin = 16,
                             content=ft.Column(
-                                controls=[components.file_groups(current_path())],
+                                controls=[components.desing.file_groups(current_path())],
                                 scroll=ft.ScrollMode.ADAPTIVE,
                             )
                         ),

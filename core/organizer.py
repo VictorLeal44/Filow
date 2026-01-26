@@ -28,7 +28,7 @@ folder_path = {
 def new_folder(name):
     Path(name).mkdir(parents=True, exist_ok=True)
 
-def file_register(path_to_scan):
+def register(path_to_scan):
     path_obj = Path(path_to_scan)
     folder_items = {
         'files':[],
