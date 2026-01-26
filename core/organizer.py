@@ -5,13 +5,7 @@ from core import models
 
 sqlmanager = models.sqlmanager()
 
-def current_path(new_path = None):
-    global data
-    if not new_path:
-        data = Path.home()
-    else:
-        data += new_path
-    return data
+user_path = Path.home()
 
 folder_path = {
     'Images': platformdirs.user_pictures_dir(),

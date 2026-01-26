@@ -36,7 +36,7 @@ def home(page):
                         border_radius=10,
                         margin = 16,
                         content=ft.Column(
-                            controls=[components.desing.folders_groups(current_path())], 
+                            controls=[components.desing.folders_groups(f'{user_path}')], 
                             scroll=ft.ScrollMode.ADAPTIVE,
                         )
                     ),
@@ -83,7 +83,7 @@ def home(page):
                             border_radius=10,
                             margin = 16,
                             content=ft.Column(
-                                controls=[components.desing.file_groups(current_path())],
+                                controls=[components.desing.file_groups(f'{user_path}')],
                                 scroll=ft.ScrollMode.ADAPTIVE,
                             )
                         ),

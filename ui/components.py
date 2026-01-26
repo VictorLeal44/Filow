@@ -4,7 +4,7 @@ from core import *
 
 class components:
     def __init__(self):
-        self.select_tile = f'{current_path()}'
+        self.select_tile = f'{user_path}'
         self.text_searcher = ft.TextField(
             expand=True,
             value = self.select_tile,
@@ -25,7 +25,21 @@ class components:
                 new_name = valor+'/'+items
                 e.control.controls.append(ft.ExpansionTile(title=items,data = new_name,controls = [],expand = True,on_change=self.open_folder))
         else:
-            print('cerrado')
+            self.text_searcher.value = valor
+        e.control.update()
+
+    def update_home(self,e):
+        e.control.controls.clear()
+
+        if e.data == True:
+            list_mapping = organizer.register(user_path)
+            self.text_searcher.value = f'{user_path}'
+            for items in list_mapping['folders']:
+                print(f"Hiciste clic en: {items}")
+                new_name = f'{user_path}/{items}'
+                e.control.controls.append(ft.ExpansionTile(title=items,data = new_name,controls = [],expand = True,on_change=self.open_folder))
+        else:
+            self.text_searcher.value = valor
         e.control.update()
 
     def folders_groups(self,path_to_scan):
@@ -37,7 +51,7 @@ class components:
                 data_name = f'{path_to_scan}/{items}'
                 print(data_name)
                 groups.append(ft.ExpansionTile(title=items,data = data_name,controls = [],on_change=self.open_folder))
-            folders_home = ft.ExpansionTile(title='/home',controls = groups, width = 240)
+            folders_home = ft.ExpansionTile(title='/home',controls = groups, width = 240,on_change = self.update_home)
         except Exception as e:
             print(e)
         return folders_home
