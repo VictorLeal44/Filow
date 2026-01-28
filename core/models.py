@@ -51,6 +51,18 @@ FROM
 		category.id = file_organization.category'''
         return self.query(sql)
 
+    def categorizer_extension(self):
+        sql = '''SELECT
+	file_organization.extension, 
+	category.category_name
+FROM
+	category
+	INNER JOIN
+	file_organization
+	ON 
+		category.id = file_organization.category'''
+        return self.query(sql)
+
     def custom_file_organization(self):
         sql = '''SELECT
 	file_organization.extension, 

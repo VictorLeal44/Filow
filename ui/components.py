@@ -5,12 +5,28 @@ from core import *
 class components:
     def __init__(self):
         self.select_tile = f'{user_path}'
+
         self.text_searcher = ft.TextField(
             expand=True,
             value = self.select_tile,
             bgcolor= '#272c32',
             border_color = '#7d7d7d',
             prefix_icon=ft.Icons.FOLDER)
+
+        self.files_list = ft.Column(controls = [],expand = True, scroll=ft.ScrollMode.AUTO)
+
+        self.icons = {
+            'Images': ft.Icons.IMAGE_OUTLINED,
+            'Document': ft.Icons.DESCRIPTION_OUTLINED,
+            'Data': ft.Icons.DATASET_OUTLINED,
+            'Audio': ft.Icons.AUDIOTRACK_OUTLINED,
+            'Video': ft.Icons.VIDEO_LIBRARY_OUTLINED,
+            'Archives': ft.Icons.INVENTORY_2_OUTLINED,  # O ZIP_OUTLINED
+            'Code': ft.Icons.CODE_OUTLINED,
+            'Executables': ft.Icons.TERMINAL_OUTLINED,
+            'Presentations': ft.Icons.CO_PRESENT_OUTLINED,
+            'unknown': ft.Icons.QUESTION_MARK_OUTLINED
+            }
 
     def open_folder(self,e):
         valor = e.control.data
@@ -20,8 +36,9 @@ class components:
         if e.data == True:
             list_mapping = organizer.register(valor)
             self.text_searcher.value = valor
+            self.file_groups(valor)
             for items in list_mapping['folders']:
-                print(f"Hiciste clic en: {valor,items}")
+                #print(f"Hiciste clic en: {valor,items}")
                 new_name = valor+'/'+items
                 e.control.controls.append(ft.ExpansionTile(title=items,data = new_name,controls = [],expand = True,on_change=self.open_folder))
         else:
@@ -39,7 +56,7 @@ class components:
                 new_name = f'{user_path}/{items}'
                 e.control.controls.append(ft.ExpansionTile(title=items,data = new_name,controls = [],expand = True,on_change=self.open_folder))
         else:
-            self.text_searcher.value = valor
+            self.text_searcher.value = f'{user_path}'
         e.control.update()
 
     def folders_groups(self,path_to_scan):
@@ -59,18 +76,19 @@ class components:
     def file_groups(self,path_to_scan):
         files = organizer.register(path_to_scan)['files']
         groups = []
-        try:
+        if files:
             for items in files:
                 print(items)
                 groups.append(ft.ListTile(
-                leading=ft.Icon(ft.Icons.SETTINGS),
+                leading=ft.Icon(self.icons[organizer.categorizer(items[2])]),
                 title=ft.Text(items[0]),
                 subtitle=ft.Text(items[1]),
-            ),
-    )
-            folders_home = ft.Column(controls = groups,expand = True, scroll=ft.ScrollMode.AUTO)
-        except Exception as e:
-            print(e)
-        return folders_home
+                ),
+            )
+            self.files_list.controls = groups
+        else:
+            self.files_list.controls = ft.Container(expand = True)
+
+        return self.files_list
 
 desing = components()

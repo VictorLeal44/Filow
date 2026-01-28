@@ -7,6 +7,8 @@ sqlmanager = models.sqlmanager()
 
 user_path = Path.home()
 
+category_ext = sqlmanager.categorizer_extension()
+
 folder_path = {
     'Images': platformdirs.user_pictures_dir(),
     'Document': platformdirs.user_documents_dir(),
@@ -30,12 +32,15 @@ def register(path_to_scan):
     }
     
     for item in path_obj.iterdir():
+
         if item.is_file() and not item.name.startswith('.'):
             extension = item.suffix 
             size = Path(item).stat().st_size
             folder_items['files'].append((item.name,f'{size} bytes',extension))
+
         elif item.is_dir() and not item.name.startswith('.'):
             folder_items['folders'].append((item.name))
+
     return folder_items
 
 def folder_mapping():
@@ -55,3 +60,10 @@ def custom_folder_mapping():
     for items in organization:
         if items[1]:
             print(items[0],items[1])
+
+def categorizer(name):
+    for items in category_ext:
+        if name in items:
+            print('correcto',name,items[1])
+            return items[1]
+    return 'unknown'
