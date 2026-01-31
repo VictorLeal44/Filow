@@ -17,10 +17,9 @@ def home(page):
                     controls=[
                     #ft.Image(src="https://flet.dev/img/logo.svg", width=100, height=100,),
                     components.desing.text_searcher,
-                    ft.FilledIconButton(icon=ft.Icons.SEARCH),
-                    ft.FilledIconButton(icon=ft.Icons.SETTINGS),
+                    components.desing.opcion_button
                 ]),
-                height=80
+                height=68
             ),
             
             ft.Row(
@@ -42,6 +41,7 @@ def home(page):
                     ),
                     ft.Column(
                         expand=True,
+                        spacing=0,
                         controls = [
                         ft.Row(
                             controls=[
@@ -71,9 +71,17 @@ def home(page):
                             border=ft.border.all(2, '#2c3035'),
                             border_radius=10,
                             padding=8,
-                            margin = ft.Margin.only(left=0,top=16,right=16,bottom=0),
+                            margin = ft.Margin.only(left=0,top=16,right=0,bottom=0),
                             height=44
                             ),
+                            ft.Container(
+                            height = 44,
+                            #bgcolor = '#3fbdbc',
+                            #border=ft.border.all(2, '#2c3035'),
+                            margin = ft.Margin.only(left=0,top=16,right=16,bottom=0),
+                            content = components.desing.organizer_button,
+                            #alignment=ft.Alignment.CENTER_RIGHT
+                            )
                             ]
                             ),
                         ft.Container(
@@ -87,6 +95,7 @@ def home(page):
                                 scroll=ft.ScrollMode.ADAPTIVE,
                             )
                         ),
+                        
                     ])
                     
                 ],

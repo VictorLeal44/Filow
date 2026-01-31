@@ -7,11 +7,12 @@ class components:
         self.select_tile = f'{user_path}'
 
         self.text_searcher = ft.TextField(
-            expand=True,
+            read_only = True,
+            expand = True,
             value = self.select_tile,
             bgcolor= '#272c32',
             border_color = '#7d7d7d',
-            prefix_icon=ft.Icons.FOLDER)
+            prefix_icon = ft.Icons.FOLDER)
 
         self.files_list = ft.Column(controls = [],expand = True, scroll=ft.ScrollMode.AUTO)
 
@@ -27,6 +28,10 @@ class components:
             'Presentations': ft.Icons.CO_PRESENT_OUTLINED,
             'unknown': ft.Icons.QUESTION_MARK_OUTLINED
             }
+
+        self.search_button = ft.FilledIconButton(icon=ft.Icons.SEARCH,bgcolor = '#007a78',icon_color = ft.Colors.WHITE)
+        self.opcion_button = ft.FilledIconButton(icon=ft.Icons.SETTINGS,bgcolor = '#007a78',icon_color = ft.Colors.WHITE)
+        self.organizer_button = ft.ElevatedButton(content="Organizar",icon=ft.Icons.LAYERS, expand = True,bgcolor = '#007a78',color = ft.Colors.WHITE)
 
     def open_folder(self,e):
         valor = e.control.data
