@@ -8,8 +8,9 @@ def main(page: ft.Page):
     #diccionario con rutas
     paginas = {
         "/inicio":home,
-        "/tienda": home_2
+        "/options": options
     }
+
 
     # plantilla principal a renderizar con ruta de inicio
     body = template.MainTemplate(page)

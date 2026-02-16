@@ -104,10 +104,33 @@ def home(page):
     )
 
 
-def home_2(page):
-    print('primera vista')
-    return ft.Column([
-        ft.Text("Pantalla de Inicio?", size=25, weight="bold"),
-        ft.Text("Esta es la página principal de tu aplicación."),
-        ft.ElevatedButton("Explorar Productos", on_click=lambda _: page.go("/inicio"))
+def options(page):
+    return ft.Column(
+        expand = True,
+        controls = [
+        ft.Container(
+        bgcolor='#272c32',
+        border=ft.border.only(bottom=ft.BorderSide(2, '#2c3035')),
+        content=ft.Row(
+            spacing=12,
+            margin=12,
+            controls=[
+            components.desing.go_back_button
+            ]),
+            height=68
+        ),
+        ft.Container(
+            ft.Column(
+                [ft.Row(expand = True,controls = components.desing.options_radio())],
+            expand = True,
+            horizontal_alignment = ft.CrossAxisAlignment.STRETCH,
+            scroll=ft.ScrollMode.ADAPTIVE,
+            ),
+        expand = True,
+        margin = 20,
+        border_radius=10,
+        bgcolor = '#272c32',
+        border = ft.border.only(bottom=ft.BorderSide(2, '#2c3035')),
+        ),
     ])
+

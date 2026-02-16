@@ -45,15 +45,16 @@ def register(path_to_scan):
 
 def folder_mapping():
     organization = sqlmanager.file_organization()
-
     for item in folder_path:
         for new_folder in organization:
-
+                
             if item == new_folder[1] and new_folder[3] == '0' and not new_folder[2]:
                 print(Path(f'{folder_path[item]}/{new_folder[0].replace('.','')}'))
             
             elif item == new_folder[1] and new_folder[3] == '1' and not new_folder[2]:
                 print(Path(f'{folder_path[item]}'))
+#luego usare las opciones
+
 
 def custom_folder_mapping():
     organization = sqlmanager.custom_file_organization()
@@ -64,6 +65,17 @@ def custom_folder_mapping():
 def categorizer(name):
     for items in category_ext:
         if name in items:
-            print('correcto',name,items[1])
+            #print('correcto',name,items[1])
             return items[1]
     return 'unknown'
+
+def organization_file(path):
+    print('comenzando a organizar :D')
+    archive = register(path)['files']
+    for i in archive:
+        category = categorizer(i[2])
+        if category != 'unknown':
+            source_path = f'{path}/{i[0]}'
+            destination_path = folder_path[category]
+            print(source_path,'sera reubicado hacia',destination_path)
+            shutil.move(source_path,destination_path)

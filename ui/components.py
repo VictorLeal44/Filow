@@ -31,7 +31,13 @@ class components:
 
         self.search_button = ft.FilledIconButton(icon=ft.Icons.SEARCH,bgcolor = '#007a78',icon_color = ft.Colors.WHITE)
         self.opcion_button = ft.FilledIconButton(icon=ft.Icons.SETTINGS,bgcolor = '#007a78',icon_color = ft.Colors.WHITE)
-        self.organizer_button = ft.ElevatedButton(content="Organizar",icon=ft.Icons.LAYERS, expand = True,bgcolor = '#007a78',color = ft.Colors.WHITE)
+        self.go_back_button = ft.FilledIconButton(icon=ft.Icons.ARROW_BACK,bgcolor = '#007a78',icon_color = ft.Colors.WHITE)
+        self.organizer_button = ft.ElevatedButton(content="Organizar",icon=ft.Icons.LAYERS, expand = True,bgcolor = '#007a78',color = ft.Colors.WHITE, on_click = self.organizer_in_process)
+
+        #self.con
+
+    def organizer_in_process(self):
+        organizer.organization_file(self.text_searcher.value)
 
     def open_folder(self,e):
         valor = e.control.data
@@ -71,7 +77,7 @@ class components:
         try:
             for items in folders:
                 data_name = f'{path_to_scan}/{items}'
-                print(data_name)
+                #print(data_name)
                 groups.append(ft.ExpansionTile(title=items,data = data_name,controls = [],on_change=self.open_folder))
             folders_home = ft.ExpansionTile(title='/home',controls = groups, width = 240,on_change = self.update_home)
         except Exception as e:
@@ -83,7 +89,7 @@ class components:
         groups = []
         if files:
             for items in files:
-                print(items)
+                #print(items)
                 groups.append(ft.ListTile(
                 leading=ft.Icon(self.icons[organizer.categorizer(items[2])]),
                 title=ft.Text(items[0]),
@@ -95,5 +101,20 @@ class components:
             self.files_list.controls = ft.Container(expand = True)
 
         return self.files_list
+
+    def options_radio(self):
+        
+        return ft.RadioGroup(
+    value="option_2",
+    content=ft.Row(
+        #intrinsic_width=True,
+        
+        controls=[
+            ft.CupertinoRadio(value="option_1", label="Option 1"),
+            ft.CupertinoRadio(value="option_2", label="Option 2"),
+            ft.CupertinoRadio(value="option_3", label="Option 3"),
+        ],
+    ),
+)
 
 desing = components()
