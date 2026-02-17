@@ -18,11 +18,12 @@ folder_path = {
     'Archives': Path.home() / "Archives",
     'Code': Path.home() / "Code",
     'Executables': Path.home() / "Executables",
-    'Presentations': platformdirs.user_documents_dir(),
+    'Presentations': platformdirs.user_documents_dir()
 }
 
-def new_folder(name):
-    Path(name).mkdir(parents=True, exist_ok=True)
+for i in folder_path.values():
+    Path(i).mkdir(parents=True, exist_ok=True)
+
 
 def register(path_to_scan):
     path_obj = Path(path_to_scan)
@@ -77,5 +78,6 @@ def organization_file(path):
         if category != 'unknown':
             source_path = f'{path}/{i[0]}'
             destination_path = folder_path[category]
-            print(source_path,'sera reubicado hacia',destination_path)
-            shutil.move(source_path,destination_path)
+            if path != destination_path:
+                print(source_path,'sera reubicado hacia',destination_path)
+                shutil.move(source_path,destination_path)

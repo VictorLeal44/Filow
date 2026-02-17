@@ -3,7 +3,8 @@ from core import *
 #3fbdbc
 
 class components:
-    def __init__(self):
+    def __init__(self,page):
+        self.page = page
         self.select_tile = f'{user_path}'
 
         self.text_searcher = ft.TextField(
@@ -38,6 +39,8 @@ class components:
 
     def organizer_in_process(self):
         organizer.organization_file(self.text_searcher.value)
+        self.page.update
+        
 
     def open_folder(self,e):
         valor = e.control.data
@@ -60,14 +63,16 @@ class components:
         e.control.controls.clear()
 
         if e.data == True:
+
             list_mapping = organizer.register(user_path)
             self.text_searcher.value = f'{user_path}'
             for items in list_mapping['folders']:
-                print(f"Hiciste clic en: {items}")
                 new_name = f'{user_path}/{items}'
                 e.control.controls.append(ft.ExpansionTile(title=items,data = new_name,controls = [],expand = True,on_change=self.open_folder))
         else:
+            
             self.text_searcher.value = f'{user_path}'
+            self.file_groups(f'{user_path}')
         e.control.update()
 
     def folders_groups(self,path_to_scan):
@@ -117,4 +122,4 @@ class components:
     ),
 )
 
-desing = components()
+desing = components(ft.Page)
