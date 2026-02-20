@@ -30,9 +30,10 @@ class components:
             'unknown': ft.Icons.QUESTION_MARK_OUTLINED
             }
 
-        self.data_folder_name = ft.Text('Carpeta')
-        self.data_file_count = ft.Text('Cantidad')
-        self.data_folder_size = ft.Text('Peso')
+        current_data = data_folder(f'{user_path}')
+        self.data_folder_name = ft.Text('Carpeta: home')
+        self.data_file_count = ft.Text(f'Cantidad: {current_data[0]}')
+        self.data_folder_size = ft.Text(f'Peso: {current_data[1]}')
 
         self.search_button = ft.FilledIconButton(icon=ft.Icons.SEARCH,bgcolor = '#007a78',icon_color = ft.Colors.WHITE)
         self.opcion_button = ft.FilledIconButton(icon=ft.Icons.SETTINGS,bgcolor = '#007a78',icon_color = ft.Colors.WHITE)
@@ -77,6 +78,12 @@ class components:
     def update_home(self,e):
         e.control.controls.clear()
 
+        current_data = data_folder(f'{user_path}')
+
+        self.data_folder_name.value = f'Carpeta: Home'
+        self.data_folder_size.value = f'peso: {current_data[0]}'
+        self.data_file_count.value = f'Cantidad: {current_data[1]}'
+
         if e.data == True:
 
             list_mapping = organizer.register(user_path)
@@ -85,6 +92,7 @@ class components:
                 new_name = f'{user_path}/{items}'
                 e.control.controls.append(ft.ExpansionTile(title=items,data = new_name,controls = [],expand = True,on_change=self.open_folder))
         else:
+
 
             self.text_searcher.value = f'{user_path}'
             self.file_groups(f'{user_path}')

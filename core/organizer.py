@@ -63,7 +63,7 @@ def data_folder(folder_path):
     size_bytes = format_bytes(size)
 
     count = 0
-    for i in Path(folder_path).rglob('*'):
+    for i in Path(folder_path).glob('*'):
         if i.is_file():
             count+= 1
     return (size_bytes,count)
