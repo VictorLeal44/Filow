@@ -46,7 +46,7 @@ def home(page):
                         ft.Row(
                             controls=[
                             ft.Container(expand=True,
-                            content = ft.Text('Carpeta'),
+                            content = components.desing.data_folder_name,
                             bgcolor = '#272c32',
                             border=ft.border.all(2, '#2c3035'),
                             border_radius=10,
@@ -56,7 +56,7 @@ def home(page):
                             ),
 
                             ft.Container(expand=True,
-                            content = ft.Text('Cantidad'),
+                            content = components.desing.data_file_count,
                             bgcolor = '#272c32',
                             border=ft.border.all(2, '#2c3035'),
                             border_radius=10,
@@ -66,7 +66,7 @@ def home(page):
                             ),
 
                             ft.Container(expand=True,
-                            content = ft.Text('Peso'),
+                            content = components.desing.data_folder_size,
                             bgcolor = '#272c32',
                             border=ft.border.all(2, '#2c3035'),
                             border_radius=10,

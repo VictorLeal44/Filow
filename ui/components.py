@@ -30,6 +30,10 @@ class components:
             'unknown': ft.Icons.QUESTION_MARK_OUTLINED
             }
 
+        self.data_folder_name = ft.Text('Carpeta')
+        self.data_file_count = ft.Text('Cantidad')
+        self.data_folder_size = ft.Text('Peso')
+
         self.search_button = ft.FilledIconButton(icon=ft.Icons.SEARCH,bgcolor = '#007a78',icon_color = ft.Colors.WHITE)
         self.opcion_button = ft.FilledIconButton(icon=ft.Icons.SETTINGS,bgcolor = '#007a78',icon_color = ft.Colors.WHITE)
         self.go_back_button = ft.FilledIconButton(icon=ft.Icons.ARROW_BACK,bgcolor = '#007a78',icon_color = ft.Colors.WHITE)
@@ -39,18 +43,29 @@ class components:
 
     def organizer_in_process(self):
         organizer.organization_file(self.text_searcher.value)
-        self.page.update
         
-
+        self.file_groups(self.text_searcher.value)
+        
+        current_data = data_folder(self.text_searcher.value)
+        self.data_folder_size.value = f'peso: {current_data[0]}'
+        self.data_file_count.value = f'Cantidad: {current_data[1]}'
+        
     def open_folder(self,e):
         valor = e.control.data
-        print(valor)
+        name_folder = e.control.title
+        current_data = data_folder(valor)
+
+        self.data_folder_name.value = f'Carpeta: {name_folder}'
+        self.data_folder_size.value = f'peso: {current_data[0]}'
+        self.data_file_count.value = f'Cantidad: {current_data[1]}'
+
         e.control.controls.clear()
 
         if e.data == True:
             list_mapping = organizer.register(valor)
             self.text_searcher.value = valor
             self.file_groups(valor)
+            
             for items in list_mapping['folders']:
                 #print(f"Hiciste clic en: {valor,items}")
                 new_name = valor+'/'+items
@@ -70,7 +85,7 @@ class components:
                 new_name = f'{user_path}/{items}'
                 e.control.controls.append(ft.ExpansionTile(title=items,data = new_name,controls = [],expand = True,on_change=self.open_folder))
         else:
-            
+
             self.text_searcher.value = f'{user_path}'
             self.file_groups(f'{user_path}')
         e.control.update()
